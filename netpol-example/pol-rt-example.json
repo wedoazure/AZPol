@@ -6,7 +6,7 @@
       "description": "Custom policy to audit if a route table exists on appropriate subnets in all vnets",
       "metadata": {
         "version": "1.1.0",
-        "category": "Network",
+        "category": "Network"
       },
       "parameters": {
         "effect": {
@@ -40,14 +40,14 @@
                             {
                                 "field": "Microsoft.Network/virtualNetworks/subnets[*].name",
                                 "equals": "AzureBastionSubnet"
-                            },
+                            }
                         ]
                     }
             }
             ]
         },
         "then": {
-          "effect": "[parameters('effect')]",
+          "effect": "[parameters('effect')]"
         }
       }
     }
