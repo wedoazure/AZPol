@@ -17,15 +17,12 @@
             "equals": "Microsoft.Network/virtualNetworks/subnets"
           },
           {
-            "field": "Microsoft.Network/virtualNetworks/subnets[*].routeTable",
-            "exists": false
+            "field": "name",
+            "notEquals": "AzureBastionSubnet"
           },
           {
-            "not":
-            {
-              "field": "name",
-              "equals": "AzureBastionSubnet"
-            }
+            "field": "Microsoft.Network/virtualNetworks/subnets/routeTable.id",
+            "exists": false
           }
         ]
       },
