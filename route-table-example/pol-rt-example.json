@@ -13,22 +13,24 @@
       "if": {
         "allOf": [
           {
-              "field": "type",
-              "equals": "Microsoft.Network/virtualNetworks"
+            "field": "type",
+            "equals": "Microsoft.Network/virtualNetworks/subnets"
+          },
+          {
+            "field": "Microsoft.Network/virtualNetworks/subnets[*].routeTable",
+            "exists": false
+          },
+          {
+            "not":
+            {
+              "field": "name",
+              "equals": "AzureBastionSubnet"
+            }
           }
-          ]
+        ]
       },
       "then": {
-        "effect": "auditIfNotExists",
-        "details": {
-          "type": "Microsoft.Network/virtualNetworks/subnets",
-          "existenceCondition": {
-              "allOf": [{
-                          "field": "Microsoft.Network/virtualNetworks/subnets[*].routeTable",
-                          "exists": false
-                        }]
-          }
-        }
+        "effect": "audit"
       }
     }
   }
