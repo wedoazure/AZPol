@@ -1,0 +1,54 @@
+{
+    "properties": {
+      "displayName": "AINE Route Table for subnets in vnets",
+      "policyType": "Custom",
+      "mode": "All",
+      "description": "Custom policy to audit if a route table exists on appropriate subnets in all vnets",
+      "metadata": {
+        "version": "1.1.0",
+        "category": "Network",
+      },
+      "parameters": {
+        "effect": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Effect",
+            "description": "Enable via AINE or disable execution of the policy"
+          },
+          "allowedValues": [
+            "AuditIfNotExists",
+            "Disabled"
+          ],
+          "defaultValue": "AuditIfNotExists"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/virtualNetworks/subnets"
+            },
+            {
+                "field": "Microsoft.Network/virtualNetworks/subnets[*].routeTable",
+                "exists": false
+            },
+            {
+                "not": 
+                    {
+                        "anyOf": [
+                            {
+                                "field": "Microsoft.Network/virtualNetworks/subnets[*].name",
+                                "equals": "AzureBastionSubnet"
+                            },
+                        ]
+                    }
+            }
+            ]
+        },
+        "then": {
+          "effect": "[parameters('effect')]",
+        }
+      }
+    }
+}
