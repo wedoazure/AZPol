@@ -1,0 +1,2 @@
+New-AzSubscriptionDeployment -Name 'az-sku-policy-deploy' -Location northeurope -TemplateFile 'C:\folderthatexists\vm-sku-policy.bicep'
+-TemplateParameterFile 'C:\folderthatexists\policy.parameters.json'
