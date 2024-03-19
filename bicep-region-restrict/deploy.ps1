@@ -1,0 +1,2 @@
+New-AzSubscriptionDeployment -Name 'az-region-policy-deploy' -Location northeurope -TemplateFile 'C:\folderthatexists\region-restrict-policy.bicep'
+-TemplateParameterFile 'C:\folderthatexists\policy.parameters.json'
